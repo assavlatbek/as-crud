@@ -1,0 +1,58 @@
+.form {
+  width: 100% !important;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form > form {
+  transition: 0.5s all;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 20px 20px 10px 20px;
+}
+
+.mb-0 {
+  margin-bottom: 8px;
+}
+
+.logo {
+  color: #fff;
+  margin: 10px 0 20px 10px;
+  cursor: pointer;
+}
+
+.ant-form-item-label {
+  padding-bottom: 3px !important;
+}
+
+.ant-layout {
+  height: 100vh;
+}
+
+.ant-layout-content {
+  overflow-y: auto;
+}
+.ant-layout-content::-webkit-scrollbar {
+  width: 7px;
+}
+
+.ant-layout-content::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.ant-layout-content::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+.ant-layout-content::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+:where(.css-dev-only-do-not-override-1vr7spz).ant-table-wrapper
+  .ant-table-pagination.ant-pagination {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  font-size: 19px;
+}
