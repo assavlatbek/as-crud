@@ -11,6 +11,7 @@ import {
   message,
 } from "antd";
 import request from "../server";
+import { Link } from "react-router-dom";
 
 function StudentPage() {
   const [data, setData] = useState([]);
@@ -51,9 +52,11 @@ function StudentPage() {
     setData(res.data);
   };
 
+  useEffect(() => {}, []);
+
   useEffect(() => {
     getData();
-  }, []);
+  });
 
   const saveLoc = async (id) => {
     localStorage.setItem("sdelID", id);
@@ -148,92 +151,105 @@ function StudentPage() {
 
   return (
     <>
-      <Modal
-        title={selected ? "Edit Student" : "Add Student"}
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <Form
-          name="wrap"
-          form={form}
-          labelCol={{
-            span: 24,
-          }}
-          wrapperCol={{
-            span: 24,
-          }}
-          style={{
-            maxWidth: 600,
-          }}
-          initialValues={{
-            remember: true,
-          }}
-          autoComplete="off"
-        >
-          <Form.Item
-            className="mb-0"
-            label="Name"
-            name="firstName"
-            rules={[
-              {
-                required: true,
-                message: "Please fill!",
-              },
-            ]}
+      {TeacherID ? (
+        <>
+          <Modal
+            title={selected ? "Edit Student" : "Add Student"}
+            open={isModalOpen}
+            onOk={handleOk}
+            okText={selected ? "Save" : "Add"}
+            onCancel={handleCancel}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            className="mb-0"
-            label="Email"
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: "Please input your email!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            className="mb-0"
-            label="Avatar"
-            name="avatar"
-            rules={[
-              {
-                required: true,
-                message: "Please fill by url!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-        </Form>
-      </Modal>
-      <section className="scroll-sec">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "ceter",
-            margin: "10px 0",
-          }}
-        >
-          <h1>All Students ({data.length})</h1>
-          <Input
-            placeholder="Search..."
-            onChange={handleSearch}
-            style={{ width: "60%" }}
-          />
-          <Button size="large" onClick={showModal}>
-            Add +
-          </Button>
-        </div>
+            <Form
+              name="wrap"
+              form={form}
+              labelCol={{
+                span: 24,
+              }}
+              wrapperCol={{
+                span: 24,
+              }}
+              style={{
+                maxWidth: 600,
+              }}
+              initialValues={{
+                remember: true,
+              }}
+              autoComplete="off"
+            >
+              <Form.Item
+                className="mb-0"
+                label="Name"
+                name="firstName"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please fill!",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                className="mb-0"
+                label="Email"
+                name="email"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your email!",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                className="mb-0"
+                label="Avatar"
+                name="avatar"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please fill by url!",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+            </Form>
+          </Modal>
+          <section className="scroll-sec">
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "ceter",
+                margin: "10px 0",
+              }}
+            >
+              <h1>All Students ({data.length})</h1>
+              <Input
+                placeholder="Search..."
+                onChange={handleSearch}
+                style={{ width: "60%" }}
+              />
+              <Button size="large" onClick={showModal}>
+                Add +
+              </Button>
+            </div>
 
-        <Table key={Date.now} columns={columns} dataSource={data} />
-      </section>
+            <Table key={Date.now} columns={columns} dataSource={data} />
+          </section>
+        </>
+      ) : (
+        <div>
+          <h1>Not Found</h1>
+          <h4>
+            Please back to <Link to={"/teacher"}>/teacher</Link> page and click
+            your teacher's see students button
+          </h4>
+        </div>
+      )}
     </>
   );
 }

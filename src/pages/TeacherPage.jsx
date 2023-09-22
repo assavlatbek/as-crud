@@ -156,6 +156,7 @@ function TeacherPage() {
         title={selected ? "Edit Teacher" : "Add Teacher"}
         open={isModalOpen}
         onOk={handleOk}
+        okText={selected ? "Save" : "Add"}
         onCancel={handleCancel}
       >
         <Form
